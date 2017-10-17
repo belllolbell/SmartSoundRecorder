@@ -12,6 +12,8 @@
 		3A9749D71F96C24B00945B44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9749D51F96C24B00945B44 /* Main.storyboard */; };
 		3A9749D91F96C24B00945B44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9749D81F96C24B00945B44 /* Assets.xcassets */; };
 		3A9749DC1F96C24B00945B44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9749DA1F96C24B00945B44 /* LaunchScreen.storyboard */; };
+		3A9749E41F96C2ED00945B44 /* RecordSoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9749E31F96C2ED00945B44 /* RecordSoundManager.swift */; };
+		3A9749E61F96C44400945B44 /* ApplicationPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9749E51F96C44400945B44 /* ApplicationPaths.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		3A9749D81F96C24B00945B44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A9749DB1F96C24B00945B44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A9749DD1F96C24B00945B44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A9749E31F96C2ED00945B44 /* RecordSoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSoundManager.swift; sourceTree = "<group>"; };
+		3A9749E51F96C44400945B44 /* ApplicationPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationPaths.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				3A9749D11F96C24B00945B44 /* AppDelegate.swift */,
 				3A9749D31F96C24B00945B44 /* ViewController.swift */,
+				3A9749E31F96C2ED00945B44 /* RecordSoundManager.swift */,
+				3A9749E51F96C44400945B44 /* ApplicationPaths.swift */,
 				3A9749D51F96C24B00945B44 /* Main.storyboard */,
 				3A9749D81F96C24B00945B44 /* Assets.xcassets */,
 				3A9749DA1F96C24B00945B44 /* LaunchScreen.storyboard */,
@@ -136,6 +142,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A9749E41F96C2ED00945B44 /* RecordSoundManager.swift in Sources */,
+				3A9749E61F96C44400945B44 /* ApplicationPaths.swift in Sources */,
 				3A9749D41F96C24B00945B44 /* ViewController.swift in Sources */,
 				3A9749D21F96C24B00945B44 /* AppDelegate.swift in Sources */,
 			);

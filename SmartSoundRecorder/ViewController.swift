@@ -10,16 +10,32 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var recordButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func recordButtonPressed(_ sender: Any) {
+        
+        let recordManager = RecordSoundManager.sharedManager
+        recordManager.delegate = self
+        recordManager.record()
     }
+}
 
-
+extension ViewController:RecordSoundManagerDelegate {
+    
+    func recordStarted(successfully: Bool) {
+        
+        if successfully {
+            recordButton.setTitle(NSLocalizedString("Stop", comment: "Record button in recording state"), for: .normal)
+        }
+    }
+    
+    func recordFinished(successfully: Bool) {
+        
+        recordButton.setTitle(NSLocalizedString("Record", comment: "Record button in inactive state"), for: .normal)
+    }
 }
 
