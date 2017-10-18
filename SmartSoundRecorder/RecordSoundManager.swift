@@ -20,57 +20,90 @@ class RecordSoundManager: NSObject {
     
     var delegate:RecordSoundManagerDelegate?
     
-    private var audioRecorder: AVAudioRecorder!
+    private var audioRecorder: AVAudioRecorder?
+    private var trimmedAudioRecorder: AVAudioRecorder?
     private var recordingSession = AVAudioSession.sharedInstance()
+    private var fullAudioFilePath:URL!
     private var audioFilePath:URL!
+    private var levelTimer = Timer()
     private var audioSettings:[String : Any]!
     
     override init() {
         super.init()
         
+        //where we will save files
         let documentsDirectory = ApplicationPaths.getDocumentsDirectory()
-        audioFilePath = documentsDirectory.appendingPathComponent("recording.m4a")
+        fullAudioFilePath = documentsDirectory.appendingPathComponent("full_audio.wav")
+        audioFilePath = documentsDirectory.appendingPathComponent("trimmed_audio.wav")
         
         audioSettings = [
-            AVFormatIDKey: Int(kAudioFormatLinearPCM),
-            AVSampleRateKey: 12000,
-            AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            AVFormatIDKey:Int(kAudioFormatLinearPCM),
+            AVSampleRateKey:44100.0,
+            AVNumberOfChannelsKey:1,
+            AVLinearPCMBitDepthKey:8,
+            AVLinearPCMIsFloatKey:false,
+            AVLinearPCMIsBigEndianKey:false,
+            AVEncoderAudioQualityKey:AVAudioQuality.max.rawValue
         ]
         
         do {
-            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setCategory(AVAudioSessionCategoryRecord)
             try recordingSession.setActive(true)
             
             recordingSession.requestRecordPermission() { allowed in
                 DispatchQueue.main.async {
                     if allowed {
-                        
+                        print ("allowed")
                     } else {
-                        // failed to record!
+                        print ("failed to record")
                     }
                 }
             }
         } catch {
-            // failed to record!
+            print ("failed to record catch")
         }
     }
     
     func record() {
         
-        if audioRecorder.isRecording {
+        if audioRecorder == nil {
             do {
-                audioRecorder = try AVAudioRecorder(url: audioFilePath, settings: audioSettings)
-                audioRecorder.delegate = self
-                audioRecorder.record()
+                audioRecorder = try AVAudioRecorder(url: fullAudioFilePath, settings: audioSettings)
+                audioRecorder!.isMeteringEnabled = true
+                audioRecorder!.delegate = self
+                audioRecorder!.updateMeters()
+                audioRecorder!.prepareToRecord()
+                audioRecorder!.record()
+              
+                trimmedAudioRecorder = try AVAudioRecorder(url: audioFilePath, settings: audioSettings)
+                trimmedAudioRecorder!.prepareToRecord()
+                
+                self.levelTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(levelTimerCallback), userInfo: nil, repeats: true)
                 
                 delegate?.recordStarted(successfully: true)
             } catch {
                 delegate?.recordStarted(successfully: false)
             }
         } else {
-            audioRecorder.stop()
+            audioRecorder!.stop()
             audioRecorder = nil
+        }
+    }
+    
+    //This selector/function is called every time our timer (levelTime) fires
+    @objc private func levelTimerCallback() {
+        //we have to update meters before we can get the metering values
+        if let recorder = audioRecorder {
+            recorder.updateMeters()
+            
+            if recorder.averagePower(forChannel: 0) > -27 {
+                print(recorder.averagePower(forChannel: 0))
+                trimmedAudioRecorder!.record()
+            } else {
+                trimmedAudioRecorder!.pause()
+            }
+            
+            print(recorder.averagePower(forChannel: 0))
         }
     }
 }

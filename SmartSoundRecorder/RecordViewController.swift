@@ -8,23 +8,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RecordViewController: UIViewController {
 
+    let recordManager = RecordSoundManager.sharedManager
+    
     @IBOutlet weak var recordButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    //MARK: Screen Actions
+    
     @IBAction func recordButtonPressed(_ sender: Any) {
         
-        let recordManager = RecordSoundManager.sharedManager
         recordManager.delegate = self
         recordManager.record()
     }
 }
 
-extension ViewController:RecordSoundManagerDelegate {
+extension RecordViewController:RecordSoundManagerDelegate {
     
     func recordStarted(successfully: Bool) {
         
