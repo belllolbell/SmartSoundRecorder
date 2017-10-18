@@ -13,6 +13,7 @@ class RecordViewController: UIViewController {
     let recordManager = RecordSoundManager.sharedManager
     
     @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,10 @@ class RecordViewController: UIViewController {
         
         recordManager.delegate = self
         recordManager.record()
+    }
+    
+    @IBAction func playButtonPressed(_ sender: Any) {
+        PlaySoundManager.sharedManager.playTrimmedAudio()
     }
 }
 

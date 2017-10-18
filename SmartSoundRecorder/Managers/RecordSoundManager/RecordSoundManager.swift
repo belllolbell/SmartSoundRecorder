@@ -18,23 +18,20 @@ class RecordSoundManager: NSObject {
     
     static let sharedManager = RecordSoundManager()
     
+    let minAveragePower: Float = -25.0
+    
     var delegate:RecordSoundManagerDelegate?
     
     private var audioRecorder: AVAudioRecorder?
     private var trimmedAudioRecorder: AVAudioRecorder?
     private var recordingSession = AVAudioSession.sharedInstance()
-    private var fullAudioFilePath:URL!
-    private var audioFilePath:URL!
+    private var fullAudioFilePath = ApplicationPaths.fullAudioPath()
+    private var audioFilePath = ApplicationPaths.trimmedAudioPath()
     private var levelTimer = Timer()
     private var audioSettings:[String : Any]!
     
     override init() {
         super.init()
-        
-        //where we will save files
-        let documentsDirectory = ApplicationPaths.getDocumentsDirectory()
-        fullAudioFilePath = documentsDirectory.appendingPathComponent("full_audio.wav")
-        audioFilePath = documentsDirectory.appendingPathComponent("trimmed_audio.wav")
         
         audioSettings = [
             AVFormatIDKey:Int(kAudioFormatLinearPCM),
@@ -86,6 +83,7 @@ class RecordSoundManager: NSObject {
             }
         } else {
             audioRecorder!.stop()
+            trimmedAudioRecorder!.stop()
             audioRecorder = nil
         }
     }
@@ -96,14 +94,11 @@ class RecordSoundManager: NSObject {
         if let recorder = audioRecorder {
             recorder.updateMeters()
             
-            if recorder.averagePower(forChannel: 0) > -27 {
-                print(recorder.averagePower(forChannel: 0))
+            if recorder.averagePower(forChannel: 0) > minAveragePower {
                 trimmedAudioRecorder!.record()
             } else {
                 trimmedAudioRecorder!.pause()
             }
-            
-            print(recorder.averagePower(forChannel: 0))
         }
     }
 }

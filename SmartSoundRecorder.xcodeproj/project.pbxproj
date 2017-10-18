@@ -14,6 +14,7 @@
 		3A9749DC1F96C24B00945B44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9749DA1F96C24B00945B44 /* LaunchScreen.storyboard */; };
 		3A9749E41F96C2ED00945B44 /* RecordSoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9749E31F96C2ED00945B44 /* RecordSoundManager.swift */; };
 		3A9749E61F96C44400945B44 /* ApplicationPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9749E51F96C44400945B44 /* ApplicationPaths.swift */; };
+		3A9749F11F97323400945B44 /* PlaySoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9749F01F97323400945B44 /* PlaySoundManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3A9749DD1F96C24B00945B44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A9749E31F96C2ED00945B44 /* RecordSoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSoundManager.swift; sourceTree = "<group>"; };
 		3A9749E51F96C44400945B44 /* ApplicationPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationPaths.swift; sourceTree = "<group>"; };
+		3A9749F01F97323400945B44 /* PlaySoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,15 +61,72 @@
 			isa = PBXGroup;
 			children = (
 				3A9749D11F96C24B00945B44 /* AppDelegate.swift */,
-				3A9749D31F96C24B00945B44 /* RecordViewController.swift */,
-				3A9749E31F96C2ED00945B44 /* RecordSoundManager.swift */,
-				3A9749E51F96C44400945B44 /* ApplicationPaths.swift */,
-				3A9749D51F96C24B00945B44 /* Main.storyboard */,
-				3A9749D81F96C24B00945B44 /* Assets.xcassets */,
-				3A9749DA1F96C24B00945B44 /* LaunchScreen.storyboard */,
-				3A9749DD1F96C24B00945B44 /* Info.plist */,
+				3A9749E91F972F6100945B44 /* Controllers */,
+				3A9749EB1F972FC200945B44 /* Managers */,
+				3A9749ED1F972FFA00945B44 /* Helpers */,
+				3A9749EE1F97303F00945B44 /* Storyboards */,
+				3A9749EA1F972F8100945B44 /* Supporting Files */,
 			);
 			path = SmartSoundRecorder;
+			sourceTree = "<group>";
+		};
+		3A9749E91F972F6100945B44 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A9749D31F96C24B00945B44 /* RecordViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3A9749EA1F972F8100945B44 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A9749D81F96C24B00945B44 /* Assets.xcassets */,
+				3A9749DD1F96C24B00945B44 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A9749EB1F972FC200945B44 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3A9749EF1F97321800945B44 /* PlaySoundManager */,
+				3A9749EC1F972FD700945B44 /* RecordSoundManager */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		3A9749EC1F972FD700945B44 /* RecordSoundManager */ = {
+			isa = PBXGroup;
+			children = (
+				3A9749E31F96C2ED00945B44 /* RecordSoundManager.swift */,
+			);
+			path = RecordSoundManager;
+			sourceTree = "<group>";
+		};
+		3A9749ED1F972FFA00945B44 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3A9749E51F96C44400945B44 /* ApplicationPaths.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3A9749EE1F97303F00945B44 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3A9749D51F96C24B00945B44 /* Main.storyboard */,
+				3A9749DA1F96C24B00945B44 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3A9749EF1F97321800945B44 /* PlaySoundManager */ = {
+			isa = PBXGroup;
+			children = (
+				3A9749F01F97323400945B44 /* PlaySoundManager.swift */,
+			);
+			path = PlaySoundManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A9749E41F96C2ED00945B44 /* RecordSoundManager.swift in Sources */,
+				3A9749F11F97323400945B44 /* PlaySoundManager.swift in Sources */,
 				3A9749E61F96C44400945B44 /* ApplicationPaths.swift in Sources */,
 				3A9749D41F96C24B00945B44 /* RecordViewController.swift in Sources */,
 				3A9749D21F96C24B00945B44 /* AppDelegate.swift in Sources */,
@@ -284,12 +344,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3BJ6TWJSH;
-				INFOPLIST_FILE = SmartSoundRecorder/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SmartSoundRecorder/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.izidev.SmartSoundRecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -299,12 +359,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3BJ6TWJSH;
-				INFOPLIST_FILE = SmartSoundRecorder/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SmartSoundRecorder/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.izidev.SmartSoundRecorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
