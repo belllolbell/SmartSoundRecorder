@@ -10,18 +10,25 @@ import UIKit
 
 class ApplicationPaths: NSObject {
     
-    static func fullAudioPath() -> URL {
+    static func streamAudioPath() -> String {
         let documentsDirectory = ApplicationPaths.getDocumentsDirectory()
-        return documentsDirectory.appendingPathComponent("full_audio.wav")
+        return documentsDirectory + "/stream.wav"
     }
     
-    static func trimmedAudioPath() -> URL {
-        let documentsDirectory = ApplicationPaths.getDocumentsDirectory()
-        return documentsDirectory.appendingPathComponent("trimmed_audio.wav")
+    static func phrasesDirectory() -> String {
+        
+        let directoryPath = ApplicationPaths.getDocumentsDirectory() + "/phrases/"
+        
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: directoryPath, isDirectory: nil) {
+            try! fileManager.createDirectory(atPath: directoryPath, withIntermediateDirectories: false, attributes: nil)
+        }
+        
+        return directoryPath
     }
     
-    static func getDocumentsDirectory() -> URL {
+    static func getDocumentsDirectory() -> String {
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        return URL.init(fileURLWithPath:documentsDirectory)
+        return documentsDirectory
     }
 }
